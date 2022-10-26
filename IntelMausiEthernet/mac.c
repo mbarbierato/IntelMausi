@@ -47,6 +47,57 @@ s32 e1000e_get_bus_info_pcie(struct e1000_hw *hw)
 #endif /* DISABLED_CODE */
 
 /**
+ *  e1000_init_mac_ops_generic - Initialize MAC function pointers
+ *  @hw: pointer to the HW structure
+ *
+ *  Setups up the function pointers to no-op functions
+ **/
+void e1000_init_mac_ops_generic(struct e1000_hw *hw)
+{
+    struct e1000_mac_info *mac = &hw->mac;
+    e_dbg("e1000_init_mac_ops_generic");
+
+    /* General Setup */
+    mac->ops.init_params = e1000_null_ops_generic;
+    mac->ops.init_hw = e1000_null_ops_generic;
+    mac->ops.reset_hw = e1000_null_ops_generic;
+    mac->ops.setup_physical_interface = e1000_null_ops_generic;
+    mac->ops.get_bus_info = e1000_null_ops_generic;
+    mac->ops.set_lan_id = e1000_set_lan_id_multi_port_pcie;
+    mac->ops.read_mac_addr = e1000_read_mac_addr_generic;
+    mac->ops.config_collision_dist = e1000_config_collision_dist_generic;
+    mac->ops.clear_hw_cntrs = e1000_null_mac_generic;
+    /* LED */
+    mac->ops.cleanup_led = e1000_null_ops_generic;
+    mac->ops.setup_led = e1000_null_ops_generic;
+    mac->ops.blink_led = e1000_null_ops_generic;
+    mac->ops.led_on = e1000_null_ops_generic;
+    mac->ops.led_off = e1000_null_ops_generic;
+    /* LINK */
+    mac->ops.setup_link = e1000_null_ops_generic;
+    mac->ops.get_link_up_info = e1000_null_link_info;
+    mac->ops.check_for_link = e1000_null_ops_generic;
+    /* Management */
+    mac->ops.check_mng_mode = e1000_null_mng_mode;
+    /* VLAN, MC, etc. */
+    mac->ops.update_mc_addr_list = e1000_null_update_mc;
+    mac->ops.clear_vfta = e1000_null_mac_generic;
+    mac->ops.write_vfta = e1000_null_write_vfta;
+    mac->ops.validate_mdi_setting = e1000_validate_mdi_setting_generic;
+    mac->ops.rar_set = e1000_rar_set_generic;
+}
+
+/**
+ *  e1000_null_ops_generic - No-op function, returns 0
+ *  @hw: pointer to the HW structure
+ **/
+s32 e1000_null_ops_generic(struct e1000_hw E1000_UNUSEDARG *hw)
+{
+    e_dbg("e1000_null_ops_generic");
+    return E1000_SUCCESS;
+}
+
+/**
  *  e1000_set_lan_id_multi_port_pcie - Set LAN id for PCIe multiple port devices
  *
  *  @hw: pointer to the HW structure

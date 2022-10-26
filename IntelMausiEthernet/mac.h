@@ -4,6 +4,8 @@
 #ifndef _E1000E_MAC_H_
 #define _E1000E_MAC_H_
 
+void e1000_init_mac_ops_generic(struct e1000_hw *hw);
+s32 e1000_null_ops_generic(struct e1000_hw E1000_UNUSEDARG *hw);
 s32 e1000e_blink_led_generic(struct e1000_hw *hw);
 s32 e1000e_check_for_copper_link(struct e1000_hw *hw);
 s32 e1000e_check_for_fiber_link(struct e1000_hw *hw);

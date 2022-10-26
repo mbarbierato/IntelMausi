@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		778A263129087CAF0061CDF4 /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 778A263029087CAF0061CDF4 /* api.c */; };
 		CE8DA0EC2517E5D9008C44E8 /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8DA0EB2517E5D9008C44E8 /* libkmod.a */; };
 		CE8DA2462519ADB6008C44E8 /* netdev.c in Sources */ = {isa = PBXBuildFile; fileRef = D36B90E01C41BF0B00C1EB37 /* netdev.c */; };
 		CE8DA2472519ADB6008C44E8 /* IntelMausiEthernet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3CB5B821A4394A800A37FAA /* IntelMausiEthernet.cpp */; };
@@ -60,6 +61,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		778A262C290874650061CDF4 /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
+		778A262D290874C60061CDF4 /* mbx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mbx.h; sourceTree = "<group>"; };
+		778A262E29087C0B0061CDF4 /* i210.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i210.h; sourceTree = "<group>"; };
+		778A263029087CAF0061CDF4 /* api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = api.c; sourceTree = "<group>"; };
 		CE8DA0EB2517E5D9008C44E8 /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libkmod.a; path = ../Lilu/MacKernelSDK/Library/x86_64/libkmod.a; sourceTree = "<group>"; };
 		CE8DA2622519ADB6008C44E8 /* IntelSnowMausi.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelSnowMausi.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAFDB4E22D0C66400728EF7 /* Changelog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Changelog.md; sourceTree = SOURCE_ROOT; };
@@ -143,6 +148,10 @@
 				D36B90D71C41BF0B00C1EB37 /* e1000.h */,
 				D36B90D91C41BF0B00C1EB37 /* hw.h */,
 				D36B90E71C41BF0B00C1EB37 /* regs.h */,
+				778A262C290874650061CDF4 /* api.h */,
+				778A262D290874C60061CDF4 /* mbx.h */,
+				778A262E29087C0B0061CDF4 /* i210.h */,
+				778A263029087CAF0061CDF4 /* api.c */,
 			);
 			name = "Intel E1000e";
 			sourceTree = "<group>";
@@ -430,6 +439,7 @@
 			files = (
 				D36B90FB1C41CA8800C1EB37 /* netdev.c in Sources */,
 				D3F3189F1AB3B0E300DA9D9A /* IntelMausiEthernet.cpp in Sources */,
+				778A263129087CAF0061CDF4 /* api.c in Sources */,
 				D36B90F51C41CA5200C1EB37 /* mac.c in Sources */,
 				D36B91031C41CAB900C1EB37 /* phy.c in Sources */,
 				D3F318A21AB3B0E300DA9D9A /* IntelMausiHardware.cpp in Sources */,

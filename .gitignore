@@ -5,3 +5,5 @@ xcuserdata
 xcshareddata
 project.xcworkspace
 /MacKernelSDK
+._*
+Lilu.kext

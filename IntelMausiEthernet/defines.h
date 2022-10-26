@@ -491,6 +491,7 @@
 #define E1000_RAH_MAC_ADDR_LEN 2
 
 /* Error Codes */
+#define E1000_SUCCESS      0
 #define E1000_ERR_NVM      1
 #define E1000_ERR_PHY      2
 #define E1000_ERR_CONFIG   3
@@ -506,6 +507,8 @@
 #define E1000_ERR_INVALID_ARGUMENT  16
 #define E1000_ERR_NO_SPACE          17
 #define E1000_ERR_NVM_PBA_SECTION   18
+#define E1000_ERR_I2C            19
+#define E1000_ERR_INVM_VALUE_NOT_FOUND    20
 
 /* Loop limit on how long we wait for auto-negotiation to complete */
 #define FIBER_LINK_UP_LIMIT               50

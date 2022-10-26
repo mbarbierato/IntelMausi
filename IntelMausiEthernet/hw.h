@@ -106,6 +106,45 @@ struct e1000_hw;
 #define E1000_DEV_ID_PCH_MTP_I219_V18        0x550B
 #define E1000_DEV_ID_PCH_MTP_I219_LM19        0x550C
 #define E1000_DEV_ID_PCH_MTP_I219_V19        0x550D
+#define E1000_DEV_ID_82576            0x10C9
+#define E1000_DEV_ID_82576_FIBER        0x10E6
+#define E1000_DEV_ID_82576_SERDES        0x10E7
+#define E1000_DEV_ID_82576_QUAD_COPPER        0x10E8
+#define E1000_DEV_ID_82576_QUAD_COPPER_ET2    0x1526
+#define E1000_DEV_ID_82576_NS            0x150A
+#define E1000_DEV_ID_82576_NS_SERDES        0x1518
+#define E1000_DEV_ID_82576_SERDES_QUAD        0x150D
+#define E1000_DEV_ID_82575EB_COPPER        0x10A7
+#define E1000_DEV_ID_82575EB_FIBER_SERDES    0x10A9
+#define E1000_DEV_ID_82575GB_QUAD_COPPER    0x10D6
+#define E1000_DEV_ID_82580_COPPER        0x150E
+#define E1000_DEV_ID_82580_FIBER        0x150F
+#define E1000_DEV_ID_82580_SERDES        0x1510
+#define E1000_DEV_ID_82580_SGMII        0x1511
+#define E1000_DEV_ID_82580_COPPER_DUAL        0x1516
+#define E1000_DEV_ID_82580_QUAD_FIBER        0x1527
+#define E1000_DEV_ID_I350_COPPER        0x1521
+#define E1000_DEV_ID_I350_FIBER            0x1522
+#define E1000_DEV_ID_I350_SERDES        0x1523
+#define E1000_DEV_ID_I350_SGMII            0x1524
+#define E1000_DEV_ID_I350_DA4            0x1546
+#define E1000_DEV_ID_I210_COPPER        0x1533
+#define E1000_DEV_ID_I210_COPPER_OEM1        0x1534
+#define E1000_DEV_ID_I210_COPPER_IT        0x1535
+#define E1000_DEV_ID_I210_FIBER            0x1536
+#define E1000_DEV_ID_I210_SERDES        0x1537
+#define E1000_DEV_ID_I210_SGMII            0x1538
+#define E1000_DEV_ID_I210_COPPER_FLASHLESS    0x157B
+#define E1000_DEV_ID_I210_SERDES_FLASHLESS    0x157C
+#define E1000_DEV_ID_I210_SGMII_FLASHLESS    0x15F6
+#define E1000_DEV_ID_I211_COPPER        0x1539
+#define E1000_DEV_ID_I354_BACKPLANE_1GBPS    0x1F40
+#define E1000_DEV_ID_I354_SGMII            0x1F41
+#define E1000_DEV_ID_I354_BACKPLANE_2_5GBPS    0x1F45
+#define E1000_DEV_ID_DH89XXCC_SGMII        0x0438
+#define E1000_DEV_ID_DH89XXCC_SERDES        0x043A
+#define E1000_DEV_ID_DH89XXCC_BACKPLANE        0x043C
+#define E1000_DEV_ID_DH89XXCC_SFP        0x0440
 
 #define E1000_REVISION_4    4
 
@@ -138,6 +177,14 @@ enum e1000_mac_type {
     e1000_pch_tgp,
     e1000_pch_adp,
     e1000_pch_mtp,
+    e1000_82575,
+    e1000_82576,
+    e1000_82580,
+    e1000_i350,
+    e1000_i354,
+    e1000_i210,
+    e1000_i211,
+    e1000_num_macs
 };
 
 enum e1000_media_type {
@@ -153,6 +200,7 @@ enum e1000_nvm_type {
     e1000_nvm_none,
     e1000_nvm_eeprom_spi,
     e1000_nvm_flash_hw,
+    e1000_nvm_invm,
     e1000_nvm_flash_sw
 };
 
@@ -176,6 +224,29 @@ enum e1000_phy_type {
     e1000_phy_82577,
     e1000_phy_82579,
     e1000_phy_i217,
+    e1000_phy_82580,
+    e1000_phy_vf,
+    e1000_phy_i210,
+};
+
+enum e1000_bus_type {
+    e1000_bus_type_unknown = 0,
+    e1000_bus_type_pci,
+    e1000_bus_type_pcix,
+    e1000_bus_type_pci_express,
+    e1000_bus_type_reserved
+};
+
+enum e1000_bus_speed {
+    e1000_bus_speed_unknown = 0,
+    e1000_bus_speed_33,
+    e1000_bus_speed_66,
+    e1000_bus_speed_100,
+    e1000_bus_speed_120,
+    e1000_bus_speed_133,
+    e1000_bus_speed_2500,
+    e1000_bus_speed_5000,
+    e1000_bus_speed_reserved
 };
 
 enum e1000_bus_width {
@@ -426,6 +497,23 @@ struct e1000_hw_stats {
     u64 ictxqmtc;
     u64 icrxdmtc;
     u64 icrxoc;
+    u64 cbtmpc;
+    u64 htdpmc;
+    u64 cbrdpc;
+    u64 cbrmpc;
+    u64 rpthc;
+    u64 hgptc;
+    u64 htcbdpc;
+    u64 hgorc;
+    u64 hgotc;
+    u64 lenerrs;
+    u64 scvpc;
+    u64 hrmpc;
+    u64 doosync;
+    u64 o2bgptc;
+    u64 o2bspc;
+    u64 b2ospc;
+    u64 b2ogprc;
 };
 
 struct e1000_phy_stats {
@@ -477,9 +565,40 @@ struct e1000_host_mng_command_info {
 #include "phy.h"
 #include "nvm.h"
 #include "manage.h"
+#include "mbx.h"
+
+/* NVM Update commands */
+#define E1000_NVMUPD_CMD_REG_READ    0x0000000B
+#define E1000_NVMUPD_CMD_REG_WRITE    0x0000000C
+
+/* NVM Update features API */
+#define E1000_NVMUPD_FEATURES_API_VER_MAJOR        0
+#define E1000_NVMUPD_FEATURES_API_VER_MINOR        0
+#define E1000_NVMUPD_FEATURES_API_FEATURES_ARRAY_LEN    12
+#define E1000_NVMUPD_EXEC_FEATURES            0xE
+#define E1000_NVMUPD_FEATURE_FLAT_NVM_SUPPORT        (1 << 0)
+#define E1000_NVMUPD_FEATURE_REGISTER_ACCESS_SUPPORT    (1 << 1)
+
+#define E1000_NVMUPD_MOD_PNT_MASK            0xFF
+
+struct e1000_nvm_access {
+    u32 command;
+    u32 config;
+    u32 offset;    /* in bytes */
+    u32 data_size;    /* in bytes */
+    u8 data[1];
+};
+
+struct e1000_nvm_features {
+    u8 major;
+    u8 minor;
+    u16 size;
+    u8 features[E1000_NVMUPD_FEATURES_API_FEATURES_ARRAY_LEN];
+};
 
 /* Function pointers for the MAC. */
 struct e1000_mac_operations {
+    s32  (*init_params)(struct e1000_hw *);
     s32  (*id_led_init)(struct e1000_hw *);
     s32  (*blink_led)(struct e1000_hw *);
     bool (*check_mng_mode)(struct e1000_hw *);
@@ -495,6 +614,8 @@ struct e1000_mac_operations {
     void (*update_mc_addr_list)(struct e1000_hw *, u8 *, u32);
     s32  (*reset_hw)(struct e1000_hw *);
     s32  (*init_hw)(struct e1000_hw *);
+    void (*shutdown_serdes)(struct e1000_hw *);
+    void (*power_up_serdes)(struct e1000_hw *);
     s32  (*setup_link)(struct e1000_hw *);
     s32  (*setup_physical_interface)(struct e1000_hw *);
     s32  (*setup_led)(struct e1000_hw *);
@@ -503,6 +624,11 @@ struct e1000_mac_operations {
     int  (*rar_set)(struct e1000_hw *, u8 *, u32);
     s32  (*read_mac_addr)(struct e1000_hw *);
     u32  (*rar_get_count)(struct e1000_hw *);
+    s32  (*validate_mdi_setting)(struct e1000_hw *);
+    s32 (*get_thermal_sensor_data)(struct e1000_hw *);
+    s32 (*init_thermal_sensor_thresh)(struct e1000_hw *);
+    s32  (*acquire_swfw_sync)(struct e1000_hw *, u16);
+    void (*release_swfw_sync)(struct e1000_hw *, u16);
 };
 
 /* When to use various PHY register access functions:
@@ -520,6 +646,7 @@ struct e1000_mac_operations {
  *
  */
 struct e1000_phy_operations {
+    s32  (*init_params)(struct e1000_hw *);
     s32  (*acquire)(struct e1000_hw *);
     s32  (*cfg_on_link_up)(struct e1000_hw *);
     s32  (*check_polarity)(struct e1000_hw *);
@@ -542,10 +669,13 @@ struct e1000_phy_operations {
     s32  (*write_reg_page)(struct e1000_hw *, u32, u16);
     void (*power_up)(struct e1000_hw *);
     void (*power_down)(struct e1000_hw *);
+    s32 (*read_i2c_byte)(struct e1000_hw *, u8, u8, u8 *);
+    s32 (*write_i2c_byte)(struct e1000_hw *, u8, u8, u8);
 };
 
 /* Function pointers for the NVM. */
 struct e1000_nvm_operations {
+    s32  (*init_params)(struct e1000_hw *);
     s32  (*acquire)(struct e1000_hw *);
     s32  (*read)(struct e1000_hw *, u16, u16, u16 *);
     void (*release)(struct e1000_hw *);
@@ -554,6 +684,19 @@ struct e1000_nvm_operations {
     s32  (*valid_led_default)(struct e1000_hw *, u16 *);
     s32  (*validate)(struct e1000_hw *);
     s32  (*write)(struct e1000_hw *, u16, u16, u16 *);
+};
+
+#define E1000_MAX_SENSORS        3
+
+struct e1000_thermal_diode_data {
+    u8 location;
+    u8 temp;
+    u8 caution_thresh;
+    u8 max_op_thresh;
+};
+
+struct e1000_thermal_sensor_data {
+    struct e1000_thermal_diode_data sensor[E1000_MAX_SENSORS];
 };
 
 struct e1000_mac_info {
@@ -588,6 +731,7 @@ struct e1000_mac_info {
     bool adaptive_ifs;
     bool has_fwsm;
     bool arc_subsystem_valid;
+    bool asf_firmware_present;
     bool autoneg;
     bool autoneg_failed;
     bool get_link_status;
@@ -595,6 +739,7 @@ struct e1000_mac_info {
     bool serdes_has_link;
     bool tx_pkt_filtering;
     enum e1000_serdes_link_state serdes_link_state;
+    struct e1000_thermal_sensor_data thermal_sensor_data;
 };
 
 struct e1000_phy_info {
@@ -648,9 +793,12 @@ struct e1000_nvm_info {
 };
 
 struct e1000_bus_info {
+    enum e1000_bus_type type;
+    enum e1000_bus_speed speed;
     enum e1000_bus_width width;
 
     u16 func;
+    u16 pci_cmd_word;
 };
 
 struct e1000_fc_info {
@@ -662,6 +810,51 @@ struct e1000_fc_info {
     bool strict_ieee;        /* Strict IEEE mode */
     enum e1000_fc_mode current_mode; /* FC mode in effect */
     enum e1000_fc_mode requested_mode; /* FC mode requested by caller */
+};
+
+struct e1000_mbx_operations {
+    s32 (*init_params)(struct e1000_hw *hw);
+    s32 (*read)(struct e1000_hw *, u32 *, u16,  u16);
+    s32 (*write)(struct e1000_hw *, u32 *, u16, u16);
+    s32 (*read_posted)(struct e1000_hw *, u32 *, u16,  u16);
+    s32 (*write_posted)(struct e1000_hw *, u32 *, u16, u16);
+    s32 (*check_for_msg)(struct e1000_hw *, u16);
+    s32 (*check_for_ack)(struct e1000_hw *, u16);
+    s32 (*check_for_rst)(struct e1000_hw *, u16);
+};
+
+struct e1000_mbx_stats {
+    u32 msgs_tx;
+    u32 msgs_rx;
+
+    u32 acks;
+    u32 reqs;
+    u32 rsts;
+};
+
+struct e1000_mbx_info {
+    struct e1000_mbx_operations ops;
+    struct e1000_mbx_stats stats;
+    u32 timeout;
+    u32 usec_delay;
+    u16 size;
+};
+
+/*struct e1000_dev_spec_82575 {
+    bool sgmii_active;
+    bool global_device_reset;
+    bool eee_disable;
+    bool module_plugged;
+    bool clear_semaphore_once;
+    u32 mtu;
+    struct sfp_e1000_flags eth_flags;
+    u8 media_port;
+    bool media_changed;
+};*/
+
+struct e1000_dev_spec_vf {
+    u32 vf_number;
+    u32 v2p_mailbox;
 };
 
 #if DISABLED_CODE
@@ -711,6 +904,7 @@ struct e1000_hw {
     struct e1000_phy_info phy;
     struct e1000_nvm_info nvm;
     struct e1000_bus_info bus;
+    struct e1000_mbx_info mbx;
     struct e1000_host_mng_dhcp_cookie mng_cookie;
 
     union {
@@ -724,6 +918,16 @@ struct e1000_hw {
 
         struct e1000_dev_spec_ich8lan ich8lan;
     } dev_spec;
+    
+    u16 device_id;
+    u16 subsystem_vendor_id;
+    u16 subsystem_device_id;
+    u16 vendor_id;
+
+    u8  revision_id;
+    /* NVM Update features */
+    struct e1000_nvm_features nvmupd_features;
+    
 };
 
 #if DISABLED_CODE
